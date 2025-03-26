@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Alumni Engagement Analysis Tool for tracking alumni participation and feedback" />
+  <title>Alumni Engagement Analysis</title>
+  <link rel="icon" href="./logo.png">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        <h1>Alumni Engagement WhatsApp Check-in</h1>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="intro">
+        <h2>Alumni Response Analysis</h2>
+        <p>Track and analyze alumni response from the WhatsApp check-in. Use the buttons below to record different types of engagement feedback.</p>
+      </section>
+
+      <section class="buttons-section">
+        <h3>Record Feedback</h3>
+        <div class="buttons">
+          <button class="btn" id="lackEngaging" title="Content was not interesting enough">
+            <i class="fas fa-thumbs-down"></i>
+            Lack of Engaging Content
+          </button>
+          <button class="btn" id="engagedOther" title="Alumni was busy with other commitments">
+            <i class="fas fa-calendar-alt"></i>
+            Engaged with Other Activities
+          </button>
+          <button class="btn" id="noData" title="No information was provided">
+            <i class="fas fa-question-circle"></i>
+            No Data
+          </button>
+          <button class="btn" id="deviceIssues" title="Technical problems prevented participation">
+            <i class="fas fa-laptop-code"></i>
+            Device Issues
+          </button>
+          <button class="btn" id="noResponse" title="Alumni did not respond to outreach">
+            <i class="fas fa-comment-slash"></i>
+            No Response
+          </button>
+        </div>
+      </section>
+
+      <section class="stats-section">
+        <div class="stats-header">
+          <h3>Statistics</h3>
+          <div class="action-buttons">
+            <button id="undoAction" class="undo-btn" title="Undo last action" disabled>
+              <i class="fas fa-undo"></i> Undo
+            </button>
+            <button id="resetStats" class="reset-btn" title="Reset all statistics">
+              <i class="fas fa-redo"></i> Reset
+            </button>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="total-container">
+            <div class="total-box">
+              <h4>Total Responses</h4>
+              <span id="totalResponses" class="total-count">0</span>
+            </div>
+          </div>
+          <ul>
+            <li>
+              <div class="stat-item">
+                <div class="stat-info">
+                  <i class="fas fa-thumbs-down"></i>
+                  <span>Lack of Engaging Content:</span>
+                </div>
+                <div class="stat-numbers">
+                  <span id="countLackEngaging">0</span>
+                  (<span id="percentLackEngaging">0</span>%)
+                </div>
+              </div>
+              <div class="progress-bar">
+                <div id="progressLackEngaging" class="progress" style="width: 0%"></div>
+              </div>
+            </li>
+            <li>
+              <div class="stat-item">
+                <div class="stat-info">
+                  <i class="fas fa-calendar-alt"></i>
+                  <span>Engaged with Other Activities:</span>
+                </div>
+                <div class="stat-numbers">
+                  <span id="countEngagedOther">0</span>
+                  (<span id="percentEngagedOther">0</span>%)
+                </div>
+              </div>
+              <div class="progress-bar">
+                <div id="progressEngagedOther" class="progress" style="width: 0%"></div>
+              </div>
+            </li>
+            <li>
+              <div class="stat-item">
+                <div class="stat-info">
+                  <i class="fas fa-question-circle"></i>
+                  <span>No Data:</span>
+                </div>
+                <div class="stat-numbers">
+                  <span id="countNoData">0</span>
+                  (<span id="percentNoData">0</span>%)
+                </div>
+              </div>
+              <div class="progress-bar">
+                <div id="progressNoData" class="progress" style="width: 0%"></div>
+              </div>
+            </li>
+            <li>
+              <div class="stat-item">
+                <div class="stat-info">
+                  <i class="fas fa-laptop-code"></i>
+                  <span>Device Issues:</span>
+                </div>
+                <div class="stat-numbers">
+                  <span id="countDeviceIssues">0</span>
+                  (<span id="percentDeviceIssues">0</span>%)
+                </div>
+              </div>
+              <div class="progress-bar">
+                <div id="progressDeviceIssues" class="progress" style="width: 0%"></div>
+              </div>
+            </li>
+            <li>
+              <div class="stat-item">
+                <div class="stat-info">
+                  <i class="fas fa-comment-slash"></i>
+                  <span>No Response:</span>
+                </div>
+                <div class="stat-numbers">
+                  <span id="countNoResponse">0</span>
+                  (<span id="percentNoResponse">0</span>%)
+                </div>
+              </div>
+              <div class="progress-bar">
+                <div id="progressNoResponse" class="progress" style="width: 0%"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="visualization-section">
+        <h3>Visual Representation</h3>
+        <div class="chart-container">
+          <div class="chart">
+            <div class="chart-bar" id="barLackEngaging">
+              <div class="bar-label">Lack of Engaging Content</div>
+            </div>
+            <div class="chart-bar" id="barEngagedOther">
+              <div class="bar-label">Engaged with Other Activities</div>
+            </div>
+            <div class="chart-bar" id="barNoData">
+              <div class="bar-label">No Data</div>
+            </div>
+            <div class="chart-bar" id="barDeviceIssues">
+              <div class="bar-label">Device Issues</div>
+            </div>
+            <div class="chart-bar" id="barNoResponse">
+              <div class="bar-label">No Response</div>
+            </div>
+          </div>
+          <div class="chart-y-axis">
+            <div>100%</div>
+            <div>75%</div>
+            <div>50%</div>
+            <div>25%</div>
+            <div>0%</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="info-section">
+        <h3>Understanding the Categories</h3>
+        <div class="info-cards">
+          <div class="info-card">
+            <h4><i class="fas fa-thumbs-down"></i> Lack of Engaging Content</h4>
+            <p>Alumni found the content shared on the groups uninteresting or not relevant to their interests or needs.</p>
+          </div>
+          <div class="info-card">
+            <h4><i class="fas fa-calendar-alt"></i> Engaged with Other Activities</h4>
+            <p>Alumni were interested but had scheduling conflicts or were committed to other personal or professional activities.</p>
+          </div>
+          <div class="info-card">
+            <h4><i class="fas fa-question-circle"></i> No Data</h4>
+            <p>Alumni could&apos;nt afford to buy data to access the internet and participate in the activities.</p>
+          </div>
+          <div class="info-card">
+            <h4><i class="fas fa-laptop-code"></i> Device Issues</h4>
+            <p>Technical problems prevented participation, such as connectivity issues, incompatible devices, or software problems.</p>
+          </div>
+          <div class="info-card">
+            <h4><i class="fas fa-comment-slash"></i> No Response</h4>
+            <p>Alumni did not respond to the message sent to their WhatsApp number.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <p>&copy; 2025 WAVE Q1 Alumni Engagement Analysis. All rights reserved.</p>
+          <p>A tool for Alumni Engagement & Business Intelligence units.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+          <a href="#"><i class="fas fa-file-contract"></i> Terms of Use</a>
+          <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="logic.js"></script>
+</body>
+</html>
