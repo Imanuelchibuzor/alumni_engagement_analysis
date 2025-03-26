@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Alumni Engagement Analysis Tool for tracking alumni participation and feedback" />
   <title>Alumni Engagement Analysis</title>
-  <link rel="icon" href="./logo.png">
+  <link rel="icon" href="/logo.png">
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
@@ -14,7 +14,7 @@
     <div class="container">
       <div class="logo">
         <i class="fas fa-graduation-cap"></i>
-        <h1>Alumni Engagement WhatsApp Check-in</h1>
+        <h1>WAVE Alumni WhatsApp Check-in</h1>
       </div>
     </div>
   </header>
@@ -22,13 +22,17 @@
   <main>
     <div class="container">
       <section class="intro">
-        <h2>Alumni Response Analysis</h2>
+        <h2>Engagement Analysis</h2>
         <p>Track and analyze alumni response from the WhatsApp check-in. Use the buttons below to record different types of engagement feedback.</p>
       </section>
 
       <section class="buttons-section">
         <h3>Record Feedback</h3>
         <div class="buttons">
+          <button class="btn" id="groupActivities" title="Alumni is participating in group activities">
+            <i class="fas fa-users"></i>
+            Participates in Group Activities
+          </button>
           <button class="btn" id="lackEngaging" title="Content was not interesting enough">
             <i class="fas fa-thumbs-down"></i>
             Lack of Engaging Content
@@ -44,6 +48,14 @@
           <button class="btn" id="deviceIssues" title="Technical problems prevented participation">
             <i class="fas fa-laptop-code"></i>
             Device Issues
+          </button>
+          <button class="btn" id="notInterestedWave" title="Alumni is no longer interested in WAVE">
+            <i class="fas fa-wave-square"></i>
+            No longer Interested in WAVE
+          </button>
+          <button class="btn" id="others" title="Other reasons not listed">
+            <i class="fas fa-ellipsis-h"></i>
+            Others
           </button>
           <button class="btn" id="noResponse" title="Alumni did not respond to outreach">
             <i class="fas fa-comment-slash"></i>
@@ -72,6 +84,21 @@
             </div>
           </div>
           <ul>
+            <li>
+              <div class="stat-item">
+                <div class="stat-info">
+                  <i class="fas fa-users"></i>
+                  <span>Participates in Group Activities:</span>
+                </div>
+                <div class="stat-numbers">
+                  <span id="countGroupActivities">0</span>
+                  (<span id="percentGroupActivities">0</span>%)
+                </div>
+              </div>
+              <div class="progress-bar">
+                <div id="progressGroupActivities" class="progress" style="width: 0%"></div>
+              </div>
+            </li>
             <li>
               <div class="stat-item">
                 <div class="stat-info">
@@ -135,6 +162,36 @@
             <li>
               <div class="stat-item">
                 <div class="stat-info">
+                  <i class="fas fa-wave-square"></i>
+                  <span>No longer Interested in WAVE:</span>
+                </div>
+                <div class="stat-numbers">
+                  <span id="countNotInterestedWave">0</span>
+                  (<span id="percentNotInterestedWave">0</span>%)
+                </div>
+              </div>
+              <div class="progress-bar">
+                <div id="progressNotInterestedWave" class="progress" style="width: 0%"></div>
+              </div>
+            </li>
+            <li>
+              <div class="stat-item">
+                <div class="stat-info">
+                  <i class="fas fa-ellipsis-h"></i>
+                  <span>Others:</span>
+                </div>
+                <div class="stat-numbers">
+                  <span id="countOthers">0</span>
+                  (<span id="percentOthers">0</span>%)
+                </div>
+              </div>
+              <div class="progress-bar">
+                <div id="progressOthers" class="progress" style="width: 0%"></div>
+              </div>
+            </li>
+            <li>
+              <div class="stat-item">
+                <div class="stat-info">
                   <i class="fas fa-comment-slash"></i>
                   <span>No Response:</span>
                 </div>
@@ -155,6 +212,9 @@
         <h3>Visual Representation</h3>
         <div class="chart-container">
           <div class="chart">
+            <div class="chart-bar" id="barGroupActivities">
+              <div class="bar-label">Currently Participates</div>
+            </div>
             <div class="chart-bar" id="barLackEngaging">
               <div class="bar-label">Lack of Engaging Content</div>
             </div>
@@ -166,6 +226,12 @@
             </div>
             <div class="chart-bar" id="barDeviceIssues">
               <div class="bar-label">Device Issues</div>
+            </div>
+            <div class="chart-bar" id="barNotInterestedWave">
+              <div class="bar-label">Not Longer Interested</div>
+            </div>
+            <div class="chart-bar" id="barOthers">
+              <div class="bar-label">Others</div>
             </div>
             <div class="chart-bar" id="barNoResponse">
               <div class="bar-label">No Response</div>
@@ -185,6 +251,10 @@
         <h3>Understanding the Categories</h3>
         <div class="info-cards">
           <div class="info-card">
+            <h4><i class="fas fa-users"></i> Participates in Group Activities</h4>
+            <p>Alumni are actively involved in group activities, such as discussions, workshops, or networking events.</p>
+          </div>
+          <div class="info-card">
             <h4><i class="fas fa-thumbs-down"></i> Lack of Engaging Content</h4>
             <p>Alumni found the content shared on the groups uninteresting or not relevant to their interests or needs.</p>
           </div>
@@ -201,8 +271,16 @@
             <p>Technical problems prevented participation, such as connectivity issues, incompatible devices, or software problems.</p>
           </div>
           <div class="info-card">
+            <h4><i class="fas fa-wave-square"></i> No longer Interested in WAVE</h4>
+            <p>Alumni have indicated they are no longer interested in participating in the WAVE program or related initiatives.</p>
+          </div>
+          <div class="info-card">
+            <h4><i class="fas fa-ellipsis-h"></i> Others</h4>
+            <p>Reasons that don't fit into the other categories or unique circumstances affecting alumni engagement.</p>
+          </div>
+          <div class="info-card">
             <h4><i class="fas fa-comment-slash"></i> No Response</h4>
-            <p>Alumni did not respond to the message sent to their WhatsApp number.</p>
+            <p>Alumni did not respond to the survey, or follow-up communications.</p>
           </div>
         </div>
       </section>
@@ -213,13 +291,8 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-info">
-          <p>&copy; 2025 WAVE Q1 Alumni Engagement Analysis. All rights reserved.</p>
-          <p>A tool for Alumni Engagement & Business Intelligence units.</p>
-        </div>
-        <div class="footer-links">
-          <a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
-          <a href="#"><i class="fas fa-file-contract"></i> Terms of Use</a>
-          <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+          <p>&copy; 2025 WAVE Alumni Engagement Analysis. All rights reserved.</p>
+          <p>A tool for the Alumni Engagement and Business Intelligence Units.</p>
         </div>
       </div>
     </div>

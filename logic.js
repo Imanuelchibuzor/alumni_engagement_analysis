@@ -5,6 +5,9 @@ let data = {
   noData: 0,
   deviceIssues: 0,
   noResponse: 0,
+  groupActivities: 0, // New category
+  notInterestedWave: 0, // New category
+  others: 0, // New category
   total: 0,
 };
 
@@ -19,6 +22,9 @@ const elements = {
     noData: document.getElementById("noData"),
     deviceIssues: document.getElementById("deviceIssues"),
     noResponse: document.getElementById("noResponse"),
+    groupActivities: document.getElementById("groupActivities"), // New button
+    notInterestedWave: document.getElementById("notInterestedWave"), // New button
+    others: document.getElementById("others"), // New button
     resetStats: document.getElementById("resetStats"),
     undoAction: document.getElementById("undoAction"),
   },
@@ -29,6 +35,9 @@ const elements = {
     noData: document.getElementById("countNoData"),
     deviceIssues: document.getElementById("countDeviceIssues"),
     noResponse: document.getElementById("countNoResponse"),
+    groupActivities: document.getElementById("countGroupActivities"), // New count
+    notInterestedWave: document.getElementById("countNotInterestedWave"), // New count
+    others: document.getElementById("countOthers"), // New count
   },
   percents: {
     lackEngaging: document.getElementById("percentLackEngaging"),
@@ -36,6 +45,9 @@ const elements = {
     noData: document.getElementById("percentNoData"),
     deviceIssues: document.getElementById("percentDeviceIssues"),
     noResponse: document.getElementById("percentNoResponse"),
+    groupActivities: document.getElementById("percentGroupActivities"), // New percent
+    notInterestedWave: document.getElementById("percentNotInterestedWave"), // New percent
+    others: document.getElementById("percentOthers"), // New percent
   },
   progress: {
     lackEngaging: document.getElementById("progressLackEngaging"),
@@ -43,6 +55,9 @@ const elements = {
     noData: document.getElementById("progressNoData"),
     deviceIssues: document.getElementById("progressDeviceIssues"),
     noResponse: document.getElementById("progressNoResponse"),
+    groupActivities: document.getElementById("progressGroupActivities"), // New progress
+    notInterestedWave: document.getElementById("progressNotInterestedWave"), // New progress
+    others: document.getElementById("progressOthers"), // New progress
   },
   bars: {
     lackEngaging: document.getElementById("barLackEngaging"),
@@ -50,6 +65,9 @@ const elements = {
     noData: document.getElementById("barNoData"),
     deviceIssues: document.getElementById("barDeviceIssues"),
     noResponse: document.getElementById("barNoResponse"),
+    groupActivities: document.getElementById("barGroupActivities"), // New bar
+    notInterestedWave: document.getElementById("barNotInterestedWave"), // New bar
+    others: document.getElementById("barOthers"), // New bar
   },
 };
 
@@ -92,6 +110,9 @@ function updateStats() {
   elements.counts.noData.textContent = data.noData;
   elements.counts.deviceIssues.textContent = data.deviceIssues;
   elements.counts.noResponse.textContent = data.noResponse;
+  elements.counts.groupActivities.textContent = data.groupActivities;
+  elements.counts.notInterestedWave.textContent = data.notInterestedWave;
+  elements.counts.others.textContent = data.others;
 
   // Update percentages
   elements.percents.lackEngaging.textContent = percent(data.lackEngaging);
@@ -99,6 +120,11 @@ function updateStats() {
   elements.percents.noData.textContent = percent(data.noData);
   elements.percents.deviceIssues.textContent = percent(data.deviceIssues);
   elements.percents.noResponse.textContent = percent(data.noResponse);
+  elements.percents.groupActivities.textContent = percent(data.groupActivities);
+  elements.percents.notInterestedWave.textContent = percent(
+    data.notInterestedWave
+  );
+  elements.percents.others.textContent = percent(data.others);
 
   // Update progress bars
   elements.progress.lackEngaging.style.width = `${percent(data.lackEngaging)}%`;
@@ -106,6 +132,13 @@ function updateStats() {
   elements.progress.noData.style.width = `${percent(data.noData)}%`;
   elements.progress.deviceIssues.style.width = `${percent(data.deviceIssues)}%`;
   elements.progress.noResponse.style.width = `${percent(data.noResponse)}%`;
+  elements.progress.groupActivities.style.width = `${percent(
+    data.groupActivities
+  )}%`;
+  elements.progress.notInterestedWave.style.width = `${percent(
+    data.notInterestedWave
+  )}%`;
+  elements.progress.others.style.width = `${percent(data.others)}%`;
 }
 
 // Function to update the visualization
@@ -119,6 +152,13 @@ function updateVisualization() {
   elements.bars.noData.style.height = `${percent(data.noData)}%`;
   elements.bars.deviceIssues.style.height = `${percent(data.deviceIssues)}%`;
   elements.bars.noResponse.style.height = `${percent(data.noResponse)}%`;
+  elements.bars.groupActivities.style.height = `${percent(
+    data.groupActivities
+  )}%`;
+  elements.bars.notInterestedWave.style.height = `${percent(
+    data.notInterestedWave
+  )}%`;
+  elements.bars.others.style.height = `${percent(data.others)}%`;
 }
 
 // Update the undo button state
@@ -145,6 +185,9 @@ function getCategoryDisplayName(category) {
     noData: "No Data",
     deviceIssues: "Device Issues",
     noResponse: "No Response",
+    groupActivities: "Participating in Group Activities",
+    notInterestedWave: "No longer Interested in WAVE",
+    others: "Others",
   };
 
   return displayNames[category] || category;
@@ -261,6 +304,9 @@ function resetStats() {
       noData: 0,
       deviceIssues: 0,
       noResponse: 0,
+      groupActivities: 0,
+      notInterestedWave: 0,
+      others: 0,
       total: 0,
     };
 
@@ -292,6 +338,15 @@ elements.buttons.deviceIssues.addEventListener("click", () =>
 );
 elements.buttons.noResponse.addEventListener("click", () =>
   recordResponse("noResponse")
+);
+elements.buttons.groupActivities.addEventListener("click", () =>
+  recordResponse("groupActivities")
+);
+elements.buttons.notInterestedWave.addEventListener("click", () =>
+  recordResponse("notInterestedWave")
+);
+elements.buttons.others.addEventListener("click", () =>
+  recordResponse("others")
 );
 elements.buttons.resetStats.addEventListener("click", resetStats);
 elements.buttons.undoAction.addEventListener("click", undoLastAction);
